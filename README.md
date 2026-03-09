@@ -172,6 +172,12 @@ Contributions are welcome! Feel free to:
 - [ ] Cooking timer
 - [ ] Meal planning features
 
+## Sponsorship
+
+If Kitchen Heritage has helped you preserve family recipes, you can support ongoing development here:
+
+- **Buy Me a Coffee:** https://buymeacoffee.com/charleshartmann
+
 ## License
 
 MIT License - feel free to use, modify, and distribute freely.
