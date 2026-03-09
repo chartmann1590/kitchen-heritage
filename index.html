@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Preserve your family's flavors, one recipe at a time. Voice-powered recipe recording app.">
+    <meta name="theme-color" content="#FF6B6B">
+    <title>Kitchen Heritage - Family Recipe Recorder</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍳</text></svg>">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>🍳 Kitchen Heritage</h1>
+            <p class="tagline">Preserve your family's flavors</p>
+        </header>
+
+        <main id="main-content">
+            <section id="recipe-list-view" class="view active">
+                <div class="actions-bar">
+                    <button id="add-recipe-btn" class="btn-primary" aria-label="Add new recipe">
+                        <span class="icon">+</span> New Recipe
+                    </button>
+                    <div class="search-box">
+                        <input type="search" id="search-input" placeholder="Search recipes..." aria-label="Search recipes">
+                    </div>
+                </div>
+
+                <div id="recipes-grid" class="recipes-grid">
+                    <div class="empty-state">
+                        <div class="empty-icon">📖</div>
+                        <h2>No recipes yet</h2>
+                        <p>Start preserving your family's culinary heritage by adding your first recipe!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="add-recipe-view" class="view">
+                <button id="back-btn" class="btn-back" aria-label="Go back">
+                    <span>←</span> Back
+                </button>
+
+                <h2 id="form-title">New Recipe</h2>
+
+                <form id="recipe-form">
+                    <div class="form-group">
+                        <label for="recipe-title">Recipe Title *</label>
+                        <input type="text" id="recipe-title" required placeholder="Grandma's Apple Pie">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="prep-time">Prep Time (min)</label>
+                            <input type="number" id="prep-time" placeholder="30" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="servings">Servings</label>
+                            <input type="number" id="servings" placeholder="8" min="1">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="author">Author/Source</label>
+                        <input type="text" id="author" placeholder="Grandma Mary">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Photo</label>
+                        <div class="photo-upload">
+                            <input type="file" id="recipe-photo" accept="image/*" hidden>
+                            <button type="button" id="photo-btn" class="btn-secondary">
+                                <span class="icon">📷</span> Add Photo
+                            </button>
+                            <div id="photo-preview" class="photo-preview hidden">
+                                <img id="preview-img" alt="Recipe photo preview">
+                                <button type="button" id="remove-photo" class="btn-icon" aria-label="Remove photo">✕</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Voice Recording</label>
+                        <div class="voice-controls">
+                            <button type="button" id="start-record-btn" class="btn-record">
+                                <span class="icon">🎤</span> Start Recording
+                            </button>
+                            <button type="button" id="stop-record-btn" class="btn-stop hidden">
+                                <span class="icon">⏹️</span> Stop
+                            </button>
+                            <div id="recording-indicator" class="recording-indicator hidden">
+                                <span class="pulse"></span>
+                                <span id="transcript-preview" class="transcript-preview"></span>
+                            </div>
+                        </div>
+                        <p class="voice-hint">Say ingredients and instructions naturally. Use "next ingredient" or "next step" to separate items.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ingredients">Ingredients *</label>
+                        <textarea id="ingredients" required placeholder="2 cups flour&#10;1 tsp salt&#10;1 cup sugar" rows="5"></textarea>
+                        <small>One ingredient per line</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="instructions">Instructions *</label>
+                        <textarea id="instructions" required placeholder="Preheat oven to 375°F&#10;Mix flour and salt&#10;Add butter and mix until crumbly" rows="6"></textarea>
+                        <small>One step per line</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="story">Family Story / Notes</label>
+                        <textarea id="story" placeholder="This recipe has been in our family for three generations..." rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tags">Tags</label>
+                        <input type="text" id="tags" placeholder="dessert, holiday, comfort-food">
+                        <small>Separate tags with commas</small>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary" id="save-btn">Save Recipe</button>
+                        <button type="button" class="btn-secondary" id="cancel-btn">Cancel</button>
+                    </div>
+                </form>
+            </section>
+
+            <section id="recipe-detail-view" class="view">
+                <div class="detail-header">
+                    <button id="back-to-list" class="btn-back" aria-label="Go back">
+                        <span>←</span> Back
+                    </button>
+                    <div class="detail-actions">
+                        <button id="edit-recipe-btn" class="btn-icon" aria-label="Edit recipe">✏️</button>
+                        <button id="export-pdf-btn" class="btn-icon" aria-label="Export as PDF">📄</button>
+                        <button id="share-recipe-btn" class="btn-icon" aria-label="Share recipe">🔗</button>
+                        <button id="delete-recipe-btn" class="btn-icon btn-danger" aria-label="Delete recipe">🗑️</button>
+                    </div>
+                </div>
+
+                <article id="recipe-detail" class="recipe-detail">
+                    <!-- Content populated by JS -->
+                </article>
+            </section>
+        </main>
+
+        <div id="toast" class="toast hidden" role="alert" aria-live="polite"></div>
+        <div id="install-prompt" class="install-prompt hidden">
+            <p>📱 Install Kitchen Heritage for quick access!</p>
+            <div class="install-actions">
+                <button id="install-btn" class="btn-primary">Install</button>
+                <button id="dismiss-install" class="btn-secondary">Not Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/speech.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/export.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
