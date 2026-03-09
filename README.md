@@ -18,6 +18,10 @@ A free, open-source, voice-powered recipe recording app for preserving family cu
 - 📱 **PWA** - Install on your phone for quick access
 - 🏷️ **Tags & Organization** - Categorize recipes for easy finding
 
+## Live Demo
+
+Visit: **https://chartmann1590.github.io/kitchen-heritage/**
+
 ## Why Kitchen Heritage?
 
 Unlike expensive recipe book platforms ($30-100+), Kitchen Heritage is:
@@ -31,30 +35,31 @@ Unlike expensive recipe book platforms ($30-100+), Kitchen Heritage is:
 
 ### Use Online
 
-Visit [your-deployment-url] to start adding recipes immediately.
+Visit **https://chartmann1590.github.io/kitchen-heritage/** to start adding recipes immediately.
 
 ### Run Locally
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/kitchen-heritage.git
+git clone https://github.com/chartmann1590/kitchen-heritage.git
 cd kitchen-heritage
 
 # Serve locally (any static server works)
 npx serve .
 # or
 python -m http.server 8000
-# or just open index.html in your browser
 ```
+
+> **Note:** Service workers and the PWA install prompt only work over `http://` or `https://` (not `file://`).
 
 ### Deploy Your Own
 
 Deploy for free to:
-- **GitHub Pages**: Push to `gh-pages` branch
+- **GitHub Pages**: Repo Settings → Pages → Deploy from branch (main / root)
 - **Netlify**: Connect your repo, deploy with one click
 - **Vercel**: `npx vercel`
 
-No build step required - just static files!
+No build step required — just static files!
 
 ## Browser Support
 
@@ -73,8 +78,8 @@ No build step required - just static files!
 2. Fill in title, prep time, servings, and author
 3. Add a photo (optional)
 4. **Voice Mode**: Click "Start Recording" and speak naturally
-   - Say "next ingredient" or "new ingredient" to separate items
-   - Say "next step" to move to the next instruction
+   - Click the **ingredients** or **instructions** field before dictating
+   - Say "next ingredient" or "next step" to separate items
 5. Or manually type ingredients and instructions (one per line)
 6. Add family story/notes (optional)
 7. Add tags for organization (optional)
@@ -87,10 +92,24 @@ No build step required - just static files!
 3. Share link copied to clipboard!
 4. Recipients can view and save the recipe
 
+> Share links store recipe text in the URL (photos are not included).
+
 ### Exporting
 
 - **📄 Export**: Opens print dialog for PDF saving or printing
 - Creates a beautiful, formatted recipe card
+
+## Data & Privacy
+
+- All recipes are stored **locally** in your browser (IndexedDB)
+- No accounts, no trackers, no cloud sync
+- To reset, clear this site's storage in your browser settings
+
+## PWA / Offline Support
+
+- Works offline once loaded
+- Install prompt appears on supported browsers
+- Add to Home Screen on iOS via Share → Add to Home Screen
 
 ## Tech Stack
 
@@ -98,7 +117,7 @@ No build step required - just static files!
 - **Storage**: IndexedDB (browser-native database)
 - **Voice**: Web Speech API (browser-native speech recognition)
 - **PWA**: Service Worker + Web App Manifest
-- **Zero build step** - No npm install, no bundlers, no config
+- **Zero build step** — No npm install, no bundlers, no config
 
 ## Project Structure
 

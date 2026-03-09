@@ -122,8 +122,10 @@ function searchRecipes(query) {
                 const filtered = recipes.filter(recipe => 
                     recipe.title.toLowerCase().includes(lowerQuery) ||
                     recipe.author?.toLowerCase().includes(lowerQuery) ||
+                    recipe.story?.toLowerCase().includes(lowerQuery) ||
                     recipe.tags?.some(tag => tag.toLowerCase().includes(lowerQuery)) ||
-                    recipe.ingredients?.some(ing => ing.toLowerCase().includes(lowerQuery))
+                    recipe.ingredients?.some(ing => ing.toLowerCase().includes(lowerQuery)) ||
+                    recipe.instructions?.some(step => step.toLowerCase().includes(lowerQuery))
                 );
                 resolve(filtered);
             })

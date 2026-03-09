@@ -302,7 +302,7 @@ const ExportModule = (function() {
             tg: recipe.tags
         };
         
-        const encoded = btoa(JSON.stringify(minimalRecipe));
+        const encoded = encodeURIComponent(btoa(JSON.stringify(minimalRecipe)));
         const shareURL = `${window.location.origin}${window.location.pathname}?recipe=${encoded}`;
         
         return shareURL;
@@ -314,7 +314,7 @@ const ExportModule = (function() {
         
         if (recipeData) {
             try {
-                const decoded = JSON.parse(atob(recipeData));
+                const decoded = JSON.parse(atob(decodeURIComponent(recipeData)));
                 return {
                     title: decoded.t,
                     ingredients: decoded.i,

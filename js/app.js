@@ -11,12 +11,17 @@
             await storage.initDB();
             
             const sharedRecipe = ExportModule.parseShareURL();
+            const action = new URLSearchParams(window.location.search).get('action');
             if (sharedRecipe) {
                 UI.populateForm(sharedRecipe);
                 UI.showView('add');
                 UI.showToast('Shared recipe loaded! Save it to your collection.', 'success');
             } else {
                 await loadRecipes();
+                if (action === 'add') {
+                    UI.clearForm();
+                    UI.showView('add');
+                }
             }
             
             setupEventListeners();
@@ -170,8 +175,12 @@
                     const recipe = await storage.getRecipe(currentRecipeId);
                     if (recipe) {
                         const shareURL = ExportModule.generateShareURL(recipe);
-                        await navigator.clipboard.writeText(shareURL);
-                        UI.showToast('Share link copied to clipboard!', 'success');
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            await navigator.clipboard.writeText(shareURL);
+                            UI.showToast('Share link copied to clipboard!', 'success');
+                        } else {
+                            window.prompt('Copy this share link:', shareURL);
+                        }
                     }
                 } catch (error) {
                     UI.showToast('Failed to generate share link', 'error');

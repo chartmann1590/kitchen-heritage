@@ -2,7 +2,8 @@
   "name": "Kitchen Heritage",
   "short_name": "KitchenHeritage",
   "description": "Preserve your family's flavors, one recipe at a time. Voice-powered recipe recording app.",
-  "start_url": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#FF6B6B",
@@ -28,7 +29,7 @@
       "name": "Add Recipe",
       "short_name": "Add",
       "description": "Add a new family recipe",
-      "url": "/?action=add"
+      "url": "./?action=add"
     }
   ]
 }
