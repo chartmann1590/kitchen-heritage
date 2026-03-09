@@ -104,6 +104,18 @@ No build step required — just static files!
 - All recipes are stored **locally** in your browser (IndexedDB)
 - No accounts, no trackers, no cloud sync
 - To reset, clear this site's storage in your browser settings
+- **Speech recognition** uses your browser's Web Speech API. Some browsers may process audio via a vendor service; review your browser's privacy policy if this matters.
+- **Share links** embed recipe text in the URL. Treat shared URLs as public and avoid sensitive data.
+
+## Security Notes (Self-Hosting)
+
+This is a static, client-only app with no backend. If you deploy it yourself, serve it over HTTPS and consider standard static-site security headers such as:
+
+- `Content-Security-Policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'`
+- `X-Content-Type-Options: nosniff`
+- `X-Frame-Options: DENY` (or `frame-ancestors 'none'`)
+- `Referrer-Policy: no-referrer`
+- `Permissions-Policy: microphone=(self)`
 
 ## PWA / Offline Support
 
